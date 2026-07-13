@@ -1,179 +1,868 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garba-The-Analyst | Systems & Security</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#000000',
-                            obsidian: '#121212',
-                            obsidianLight: '#1e1e1e',
-                            silver: '#c0c0c0',
-                            silverDark: '#a0a0a0',
-                            navy: '#0a192f',
-                            navyLight: '#112240',
-                            navyAccent: '#1d3557'
-                        }
-                    },
-                    fontFamily: {
-                        mono: ['"Fira Code"', '"Courier New"', 'monospace'],
-                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                black: "#000000",
+                obsidian: "#121212",
+                obsidianLight: "#1e1e1e",
+                silver: "#c0c0c0",
+                silverDark: "#a0a0a0",
+                navy: "#0a192f",
+                navyAccent: "#1d3557",
+              },
+            },
+            fontFamily: {
+              mono: ['"Fira Code"', '"Courier New"', "monospace"],
+              sans: ['"Inter"', "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body { background-color: #000000; color: #c0c0c0; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000000; }
-        ::-webkit-scrollbar-thumb { background: #1d3557; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #c0c0c0; }
-        .glass-panel { background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(192, 192, 192, 0.1); }
+      body {
+        background-color: #000000;
+        color: #c0c0c0;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1d3557;
+        border-radius: 4px;
+      }
+      .glass-panel {
+        background: rgba(18, 18, 18, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+      }
+      .db-header {
+        border-left: 4px solid #1d3557;
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+      }
     </style>
-</head>
-<body class="font-sans antialiased selection:bg-brand-navyAccent selection:text-white">
-
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
+  </head>
+  <body
+    class="font-sans antialiased selection:bg-brand-navyAccent selection:text-white"
+  >
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-panel border-b border-brand-obsidianLight">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="font-mono text-xl font-bold tracking-tighter text-white">
-                        Garba-The-Analyst<span class="text-brand-navyAccent">_</span>
-                    </a>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-brand-silver hover:text-white text-sm font-mono tracking-wide transition-colors">01. About</a>
-                    <a href="#projects" class="text-brand-silver hover:text-white text-sm font-mono tracking-wide transition-colors">02. All Works</a>
-                    <a href="#contact" class="text-brand-silver hover:text-white text-sm font-mono tracking-wide transition-colors">03. Contact</a>
-                </div>
-            </div>
+    <nav class="fixed w-full z-50 glass-panel">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a
+            href="#"
+            class="font-mono text-xl font-bold tracking-tighter text-white"
+          >
+            Garba-The-Analyst<span class="text-brand-navyAccent">_</span>
+          </a>
+          <div
+            class="hidden md:flex space-x-6 text-sm font-mono text-brand-silver"
+          >
+            <a href="#profile" class="hover:text-white transition-colors"
+              >Profile</a
+            >
+            <a href="#services" class="hover:text-white transition-colors"
+              >Services</a
+            >
+            <a href="#experience" class="hover:text-white transition-colors"
+              >Experience</a
+            >
+            <a href="#projects" class="hover:text-white transition-colors"
+              >Projects</a
+            >
+            <a href="#contact" class="hover:text-white transition-colors"
+              >Contact</a
+            >
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="about" class="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-20">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-navy rounded-full mix-blend-screen filter blur-[128px] opacity-30"></div>
-        
-        <div class="max-w-7xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6 order-2 lg:order-1">
-                <p class="text-brand-navyAccent font-mono text-sm sm:text-base tracking-widest uppercase">Initiating protocol...</p>
-                <h1 class="text-5xl sm:text-7xl font-bold text-white tracking-tight leading-tight">
-                    Abdullahi Baba Garba.
-                </h1>
-                <h2 class="text-3xl sm:text-4xl font-bold text-brand-silverDark tracking-tight">
-                    Systems Engineer & Security Researcher.
-                </h2>
-                <!-- Dynamic Bio from CMS -->
-                <p class="max-w-xl text-lg text-brand-silver leading-relaxed pt-4 whitespace-pre-line">
-                    {{ about.bio | default('I am a multi-disciplinary developer working at the intersection of production-grade software deployment, low-level architectural design, and tactical systems engineering.') }}
-                </p>
-                <div class="pt-8 flex flex-wrap gap-4">
-                    <a href="#projects" class="bg-brand-navyAccent hover:bg-brand-navy text-white px-8 py-3 rounded text-sm font-mono border border-brand-navyAccent transition-all shadow-[0_0_15px_rgba(29,53,87,0.5)]">
-                        View Portfolio
-                    </a>
-                </div>
-            </div>
-
-            <!-- Dynamic Profile Picture from CMS -->
-            <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
-                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-sm border-2 border-brand-navyAccent p-2 group">
-                    <div class="absolute inset-0 bg-brand-navyAccent translate-x-4 translate-y-4 rounded-sm -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
-                    <img src="{{ about.profile_pic | default('https://via.placeholder.com/400x400/121212/c0c0c0?text=Profile+Picture') }}" alt="Abdullahi Garba" class="w-full h-full object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-500">
-                </div>
-            </div>
+    <section
+      class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight flex flex-col-reverse lg:flex-row items-center gap-12"
+    >
+      <div class="flex-1">
+        <h1
+          class="text-5xl sm:text-6xl font-bold text-white tracking-tight mb-4"
+        >
+          Abdullahi Baba Garba.
+        </h1>
+        <h2 class="text-2xl sm:text-3xl font-bold text-brand-silverDark mb-6">
+          Systems Engineer & Security Researcher.
+        </h2>
+        <p class="max-w-3xl text-lg text-brand-silver leading-relaxed mb-8">
+          I am a software developer and security analyst. I build highly secure,
+          reliable technology—from trading platforms to custom computer
+          operating systems. My work is driven by logic, strategy, and a
+          commitment to creating systems that do not fail.
+        </p>
+        <div class="flex flex-wrap gap-4 font-mono text-sm mb-6">
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >Python</span
+          >
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >JavaScript</span
+          >
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >C/C++</span
+          >
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >Assembly</span
+          >
+          <span
+            class="bg-brand-navyAccent/20 px-4 py-2 rounded-sm border border-brand-navyAccent/50 text-brand-navyAccent"
+            >Learning: Rust</span
+          >
         </div>
+      </div>
+
+      <!-- Profile Picture Slot -->
+      <div class="flex-shrink-0">
+        <div
+          class="relative w-56 h-56 sm:w-72 sm:h-72 rounded-sm border-2 border-brand-navyAccent p-2 group"
+        >
+          <div
+            class="absolute inset-0 bg-brand-navyAccent translate-x-4 translate-y-4 rounded-sm -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"
+          ></div>
+          <img
+            src="assets/images/516736823_4147310365549284_1791859579386003572_n.jpg"
+            alt="Abdullahi Garba"
+            class="w-full h-full object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-500"
+          />
+        </div>
+      </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 bg-brand-obsidian border-t border-brand-obsidianLight">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono"><span class="text-brand-navyAccent">02.</span> System Architectures & Projects</h2>
-                <div class="h-px bg-brand-obsidianLight flex-grow ml-6"></div>
-            </div>
+    <!-- Services Section -->
+    <section
+      id="services"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">Core Services</h2>
+        <p class="text-brand-silver mt-2 text-sm">
+          Professional development, research, and technical implementations.
+        </p>
+      </div>
 
-            <!-- Dynamic Projects Grid Loop -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                {% for project in collections.projects | reverse %}
-                <div class="bg-brand-black border border-brand-obsidianLight rounded-sm overflow-hidden hover:border-brand-navyAccent transition-colors flex flex-col group relative">
-                    {% if project.data.image %}
-                    <img src="{{ project.data.image }}" alt="{{ project.data.title }}" class="w-full h-48 object-cover border-b border-brand-obsidianLight opacity-70 group-hover:opacity-100 transition-opacity">
-                    {% else %}
-                    <div class="w-full h-48 bg-brand-obsidianLight flex items-center justify-center border-b border-brand-obsidianLight opacity-70 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-code text-4xl text-brand-navyAccent opacity-50"></i>
-                    </div>
-                    {% endif %}
-                    
-                    <div class="p-6 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-2">{{ project.data.title }}</h3>
-                            <p class="text-brand-silver text-sm mb-4">{{ project.data.description }}</p>
-                        </div>
-                        
-                        <div class="flex justify-between items-end mt-4">
-                            <ul class="flex flex-wrap gap-2 font-mono text-xs text-brand-silverDark">
-                                {% if project.data.technologies %}
-                                <li class="text-brand-navyAccent">{{ project.data.technologies }}</li>
-                                {% endif %}
-                            </ul>
-                            
-                            {% if project.data.github %}
-                            <a href="{{ project.data.github }}" target="_blank" class="text-brand-silver hover:text-white transition-colors z-10" aria-label="GitHub Repository">
-                                <i class="fa-brands fa-github text-xl"></i>
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                <p class="text-brand-silverDark font-mono">No active projects found. Initializing portfolio...</p>
-                {% endfor %}
-
-            </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i class="fa-solid fa-code text-2xl text-brand-navyAccent mb-4"></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Web Development
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Full-stack web architectures, reactive UI/UX, and robust backend API
+            integrations designed for scale.
+          </p>
         </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i class="fa-solid fa-server text-2xl text-brand-navyAccent mb-4"></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Software Development
+          </h3>
+          <p class="text-sm text-brand-silver">
+            End-to-end full-stack software engineering, focusing on secure,
+            reliable, and production-ready applications.
+          </p>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i
+            class="fa-solid fa-chart-pie text-2xl text-brand-navyAccent mb-4"
+          ></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Data Analysis
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Advanced quantitative research, processing, and structural mapping
+            to turn complex raw data into actionable insights.
+          </p>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i class="fa-solid fa-robot text-2xl text-brand-navyAccent mb-4"></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Machine Learning & AI
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Designing and deploying hybrid machine learning models,
+            neuro-symbolic AI, and structural prediction engines.
+          </p>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i
+            class="fa-solid fa-magnifying-glass-chart text-2xl text-brand-navyAccent mb-4"
+          ></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            General Research
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Academic and corporate research support, statistical validation, and
+            comprehensive structural proposal development.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer / Contact -->
-    <footer id="contact" class="bg-brand-black border-t border-brand-obsidianLight py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-6">Establish Connection.</h2>
-            <div class="flex flex-wrap justify-center gap-6 mb-8">
-                <a href="mailto:garbaabdullahi344@gmail.com" class="text-brand-silver hover:text-white font-mono text-sm border border-brand-obsidianLight px-6 py-2 rounded-sm bg-brand-obsidian hover:border-brand-navyAccent transition-all">garbaabdullahi344@gmail.com</a>
-                <a href="https://wa.me/+2348133874906" target="_blank" class="text-brand-silver hover:text-white font-mono text-sm border border-brand-obsidianLight px-6 py-2 rounded-sm bg-brand-obsidian hover:border-brand-navyAccent transition-all"><i class="fa-brands fa-whatsapp mr-2"></i>+234 813 387 4906</a>
-            </div>
-            <div class="flex justify-center space-x-6 text-xl mb-8">
-                <a href="https://github.com/abdullahi-garba" target="_blank" class="text-brand-silverDark hover:text-white"><i class="fa-brands fa-github"></i></a>
-                <a href="https://facebook.com/abdullahi.garba.1259" target="_blank" class="text-brand-silverDark hover:text-[#1877F2]"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://instagram.com/garba_the_analyst" target="_blank" class="text-brand-silverDark hover:text-[#E4405F]"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-            <p class="text-brand-silverDark font-mono text-xs">&copy; 2026 Garba-The-Analyst. All systems nominal.</p>
+    <!-- Profile & Bio-Data -->
+    <section
+      id="profile"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">
+          Personal Profile
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Bio-Data
+          </h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <strong class="text-brand-silverDark">DOB:</strong> 23 October,
+              2000
+            </li>
+            <li><strong class="text-brand-silverDark">Gender:</strong> Male</li>
+            <li>
+              <strong class="text-brand-silverDark">Marital Status:</strong>
+              Single
+            </li>
+            <li>
+              <strong class="text-brand-silverDark">Nationality:</strong>
+              Nigerian
+            </li>
+            <li>
+              <strong class="text-brand-silverDark">State:</strong> Niger State
+            </li>
+            <li>
+              <strong class="text-brand-silverDark">LGA:</strong> Chanchaga
+            </li>
+            <li>
+              <strong class="text-brand-silverDark">Ethnicity:</strong> Gbagyi
+            </li>
+          </ul>
         </div>
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Personal Traits
+          </h3>
+          <ul class="space-y-2 text-sm list-disc list-inside">
+            <li>Practical honesty & Loyalty</li>
+            <li>Calm and Coordinated</li>
+            <li>Highly Detailed</li>
+            <li>Objective & Justice driven</li>
+          </ul>
+          <h3
+            class="text-white font-bold mt-6 mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Languages
+          </h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <strong class="text-brand-silverDark">English:</strong>
+              Professional
+            </li>
+            <li>
+              <strong class="text-brand-silverDark">Hausa:</strong> Native /
+              Fluent
+            </li>
+          </ul>
+        </div>
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Hobbies & Interests
+          </h3>
+          <ul class="space-y-2 text-sm list-disc list-inside">
+            <li>Reading History</li>
+            <li>Hiking & Outdoors</li>
+            <li>Watching Movies & Documentaries</li>
+            <li>Listening to Music</li>
+            <li>Spending time with loved ones</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Education Database -->
+    <section
+      id="experience"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">
+          Experience & Education
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Work Experience List -->
+        <div class="space-y-6">
+          <h3 class="text-xl font-bold text-brand-navyAccent font-mono mb-4">
+            Work History
+          </h3>
+
+          <!-- ========================================== -->
+          <!-- 🗄️ DATABASE ENTRY: JOB 1 -->
+          <!-- ========================================== -->
+          <div class="border-l-2 border-brand-obsidianLight pl-4">
+            <h4 class="text-white font-bold text-lg">
+              Customer Representative & Technical Advisor
+            </h4>
+            <p class="text-brand-navyAccent text-sm font-mono mb-2">
+              Coinly Technologies LTD | 2025 – Present
+            </p>
+            <p class="text-sm text-brand-silver leading-relaxed">
+              I manage client relationships and advise on safe digital
+              transactions. I work directly with the technical team to improve
+              the security of the platform and ensure user documents are
+              verified safely.
+            </p>
+          </div>
+          <!-- ========================================== -->
+
+          <!-- ========================================== -->
+          <!-- 🗄️ DATABASE ENTRY: JOB 2 -->
+          <!-- ========================================== -->
+          <div class="border-l-2 border-brand-obsidianLight pl-4">
+            <h4 class="text-white font-bold text-lg">
+              Founder & Lead Technical Consultant
+            </h4>
+            <p class="text-brand-navyAccent text-sm font-mono mb-2">
+              The Analyst Consultancy | 2024 – Present
+            </p>
+            <p class="text-sm text-brand-silver leading-relaxed">
+              I run an independent agency providing software development, data
+              analysis, and brand design. A major highlight includes helping PhD
+              researchers process complex data using advanced statistical
+              models.
+            </p>
+          </div>
+          <!-- ========================================== -->
+        </div>
+
+        <!-- Education List -->
+        <div class="space-y-6">
+          <h3 class="text-xl font-bold text-brand-navyAccent font-mono mb-4">
+            Education
+          </h3>
+
+          <!-- ========================================== -->
+          <!-- 🗄️ DATABASE ENTRY: EDUCATION 1 -->
+          <!-- ========================================== -->
+          <div class="border-l-2 border-brand-obsidianLight pl-4">
+            <h4 class="text-white font-bold text-lg">
+              B.Sc. Cyber Security Science
+            </h4>
+            <p class="text-brand-navyAccent text-sm font-mono mb-2">
+              Newgate University Minna | 2025 – Present
+            </p>
+            <p class="text-sm text-brand-silver leading-relaxed">
+              Focusing on web programming, digital forensics, and secure system
+              design. I also serve as the Lead of the Newgate Developers'
+              Circle, organizing coding classes and events for students.
+            </p>
+          </div>
+          <!-- ========================================== -->
+
+          <!-- ========================================== -->
+          <!-- 🗄️ DATABASE ENTRY: EDUCATION 2 -->
+          <!-- ========================================== -->
+          <div class="border-l-2 border-brand-obsidianLight pl-4">
+            <h4 class="text-white font-bold text-lg">
+              B.Tech. Computer Science
+            </h4>
+            <p class="text-brand-navyAccent text-sm font-mono mb-2">
+              Federal University of Technology (FUT) Minna | 2018 – 2024
+            </p>
+            <p class="text-sm text-brand-silver leading-relaxed">
+              Focused on how computers solve problems and manage data. I wrote
+              my final thesis on national cyber security, measuring the risks
+              and economic impacts of digital attacks.
+            </p>
+          </div>
+          <!-- ========================================== -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Database -->
+    <section
+      id="projects"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">
+          Project Portfolio
+        </h2>
+        <p class="text-brand-silver mt-2 text-sm">
+          Categorized software, security, and research builds.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        <!-- CATEGORY: FINANCE & TRADING -->
+        <div>
+          <h3
+            class="text-xl font-bold text-white border-b border-brand-obsidianLight pb-2 mb-6"
+          >
+            1. Finance & Trading Apps
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">NEXSEN TRADE.AI</h4>
+              <p class="text-sm text-brand-silver mb-4">
+                A financial trading app built with Vue.js and Node.js. It
+                features live charts, real-time order books, and securely
+                connects to outside cryptocurrency exchanges.
+              </p>
+              <a
+                href="https://github.com/garba-the-analyst/NEXSEN-TRADE-AI"
+                class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-white font-bold text-lg">MiddleMan Terminal</h4>
+                <span
+                  class="bg-brand-navyAccent/20 text-brand-navyAccent text-xs font-mono px-2 py-1 rounded-sm border border-brand-navyAccent/50"
+                  >[IN PROGRESS]</span
+                >
+              </div>
+              <p class="text-sm text-brand-silver mb-4">
+                An automated bot that runs inside WhatsApp for trading crypto
+                and gift cards. It is highly secure, requiring a 4-digit PIN and
+                specific text commands to work.
+              </p>
+              <a
+                href="https://github.com/garba-the-analyst/MiddleMan-Terminal"
+                class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                >View on GitHub &rarr;</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY: SECURITY & SYSTEMS -->
+        <div>
+          <h3
+            class="text-xl font-bold text-white border-b border-brand-obsidianLight pb-2 mb-6"
+          >
+            2. Security & Operating Systems
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-white font-bold text-lg">LUNA-OS</h4>
+                <span
+                  class="bg-brand-navyAccent/20 text-brand-navyAccent text-xs font-mono px-2 py-1 rounded-sm border border-brand-navyAccent/50"
+                  >[IN PROGRESS]</span
+                >
+              </div>
+              <p class="text-sm text-brand-silver mb-4">
+                A custom, highly secure computer operating system built on
+                Linux. It is designed to run safely on private networks and
+                features its own built-in AI.
+              </p>
+              <a
+                href="https://github.com/garba-the-analyst/luna-os"
+                class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                SoloScan Security Suite
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                A cybersecurity tool for Windows, Linux, and Android. It helps
+                find network vulnerabilities, monitor traffic, and gather data
+                on potential threats.
+              </p>
+              <a
+                href="https://github.com/garba-the-analyst/SoloScan-Security-Suite"
+                class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                ML Phishing Detector
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                A web browser extension that uses Artificial Intelligence to
+                scan websites, detect fake or scam pages, and protect users from
+                phishing attacks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY: BUSINESS & EDUCATION -->
+        <div>
+          <h3
+            class="text-xl font-bold text-white border-b border-brand-obsidianLight pb-2 mb-6"
+          >
+            3. Business & Education Platforms
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                OmniLearn X SkillLink
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                A large educational platform featuring secure payments, student
+                bookings, and a system that generates secure, verifiable digital
+                certificates.
+              </p>
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-white font-bold text-lg">Cabinet-otg</h4>
+                <span
+                  class="bg-brand-navyAccent/20 text-brand-navyAccent text-xs font-mono px-2 py-1 rounded-sm border border-brand-navyAccent/50"
+                  >[IN PROGRESS]</span
+                >
+              </div>
+              <p class="text-sm text-brand-silver mb-4">
+                An automated, private digital file management and storage
+                application utilizing strict hierarchical access control
+                protocols, scalable on AWS.
+              </p>
+              <a
+                href="https://github.com/garba-the-analyst/cabinet-personal-vault"
+                class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-white font-bold text-lg">easyRide</h4>
+                <span
+                  class="bg-brand-navyAccent/20 text-brand-navyAccent text-xs font-mono px-2 py-1 rounded-sm border border-brand-navyAccent/50"
+                  >[IN PROGRESS]</span
+                >
+              </div>
+              <p class="text-sm text-brand-silver mb-4">
+                A dedicated ride-hailing and logistics application engineered
+                specifically to connect commercial vehicle owners and shop
+                owners for streamlined operations.
+              </p>
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                Citizens Watch Minna
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                A data mapping system built for 11 city wards. It organized and
+                processed grassroots data for over 1,100 local field agents.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY: RESEARCH & DESIGN -->
+        <div>
+          <h3
+            class="text-xl font-bold text-white border-b border-brand-obsidianLight pb-2 mb-6"
+          >
+            4. Research & Creative Consulting
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                Macro-Economic Research
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                Conducted a research study and wrote a proposal on how the
+                government could use AI tools to improve tax collection from
+                small, informal businesses.
+              </p>
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <h4 class="text-white font-bold text-lg mb-2">
+                Multimedia & Branding
+              </h4>
+              <p class="text-sm text-brand-silver mb-4">
+                Hired by retail and solar businesses in Abuja to write video
+                marketing scripts, design logos, and build overall brand
+                identities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ambitions & Physical Training -->
+    <section
+      id="ambitions"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">
+          Strategic Ambitions & Discipline
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3 class="text-white font-bold mb-4 font-mono">
+            Core Goals & Interests
+          </h3>
+          <ul class="space-y-4 text-sm text-brand-silver">
+            <li>
+              <strong class="text-white">Military Leadership:</strong> Driven by
+              a lifelong ambition to serve and rise as a high-ranking military
+              general, combining strategy with modern defense tactics.
+            </li>
+            <li>
+              <strong class="text-white">Technological Invention:</strong>
+              Aiming to build a premier defense and technology company that
+              creates secure, proprietary national infrastructure.
+            </li>
+            <li>
+              <strong class="text-white">Intellectual Focus:</strong> Deeply
+              interested in rocket science, aerospace, advanced Artificial
+              Intelligence, and the philosophy of logical decision-making.
+            </li>
+          </ul>
+        </div>
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3 class="text-white font-bold mb-4 font-mono">
+            Physical Conditioning
+          </h3>
+          <p class="text-sm text-brand-silver mb-4">
+            I strongly believe in physical resilience and operate best in
+            environments that require mental toughness and decisive action under
+            stress.
+          </p>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>Dedicated practitioner of Taekwondo.</li>
+            <li>Continuous training in powerlifting.</li>
+            <li>Advanced calisthenics and plyometrics.</li>
+            <li>Structured military-style physical conditioning.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact, Referees & Next of Kin -->
+    <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <div class="db-header">
+            <h2 class="text-3xl font-bold text-white font-mono">
+              Establish Connection
+            </h2>
+          </div>
+          <div class="space-y-4 font-mono text-sm">
+            <p>
+              <strong class="text-brand-silverDark">Primary Email:</strong>
+              <a
+                href="mailto:garbaabdullahi344@gmail.com"
+                class="text-brand-navyAccent hover:text-white"
+                >garbaabdullahi344@gmail.com</a
+              >
+            </p>
+            <p>
+              <strong class="text-brand-silverDark">Backup Email:</strong>
+              <a
+                href="mailto:garbaabullahi0010@gmail.com"
+                class="text-brand-navyAccent hover:text-white"
+                >garbaabullahi0010@gmail.com</a
+              >
+            </p>
+            <p>
+              <strong class="text-brand-silverDark"
+                >Primary Phone / WhatsApp:</strong
+              >
+              +234 813 387 4906
+            </p>
+            <p>
+              <strong class="text-brand-silverDark">Backup Phone:</strong> +234
+              906 870 2633
+            </p>
+            <p>
+              <strong class="text-brand-silverDark">Location:</strong> Minna,
+              Niger State, Nigeria
+            </p>
+          </div>
+          <div class="flex space-x-6 text-xl mt-8">
+            <a
+              href="https://github.com/garba-the-analyst"
+              target="_blank"
+              class="text-brand-silverDark hover:text-white"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              href="https://wa.me/+2348133874906"
+              target="_blank"
+              class="text-brand-silverDark hover:text-[#25D366]"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a
+              href="https://facebook.com/abdullahi.garba.1259"
+              target="_blank"
+              class="text-brand-silverDark hover:text-[#1877F2]"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a
+              href="https://instagram.com/garba_the_analyst"
+              target="_blank"
+              class="text-brand-silverDark hover:text-[#E4405F]"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            References & Emergency Contacts
+          </h3>
+          <div class="space-y-6 text-sm">
+            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
+            <div>
+              <p>
+                <strong class="text-white"
+                  >Father: Garba Abdullahi, PhD. (Magatakardan Minna)</strong
+                >
+              </p>
+              <p class="text-brand-silver">
+                Registrar, Abdulkadir Kure University Minna.
+              </p>
+              <p class="text-brand-navyAccent font-mono mt-1">
+                +234 803 701 2633
+              </p>
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
+            <div>
+              <p>
+                <strong class="text-white"
+                  >Mother: Hajiya. Halimatu Abdulhameed</strong
+                >
+              </p>
+              <p class="text-brand-silver">
+                RIO Chanchaga LGA, NSPHCDA, Minna.
+              </p>
+              <p class="text-brand-navyAccent font-mono mt-1">
+                +234 803 492 1733
+              </p>
+            </div>
+            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
+            <div>
+              <p>
+                <strong class="text-white"
+                  >Next of Kin / Brother: CAsp. Garba Muhammad Kabir</strong
+                >
+              </p>
+              <p class="text-brand-navyAccent font-mono mt-1">
+                +234 906 650 4477
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-brand-black border-t border-brand-obsidianLight py-8 mt-12"
+    >
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-brand-silverDark font-mono text-xs">
+          &copy; 2026 Abdullahi Baba Garba. All systems nominal.
+        </p>
+      </div>
     </footer>
-    
-    <!-- Fix Netlify Identity routing after login -->
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
-</body>
+  </body>
 </html>
