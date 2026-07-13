@@ -13,18 +13,32 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Technologies (Comma separated)", name: "technologies", widget: "string"}
-      - {label: "Project Image", name: "image", widget: "image", required: false}
-      - {label: "GitHub Link", name: "github", widget: "string", required: false}
-  
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - {
+          label: "Technologies (Comma separated)",
+          name: "technologies",
+          widget: "string",
+        }
+      - {
+          label: "Project Image",
+          name: "image",
+          widget: "image",
+          required: false,
+        }
+      - {
+          label: "GitHub Link",
+          name: "github",
+          widget: "string",
+          required: false,
+        }
+
   - name: "about"
     label: "About & Profile"
     files:
-      - file: "src/content/about.yml"
+      - file: "src/_data/about.yml"
         name: "about_info"
         label: "Profile Information"
         fields:
-          - {label: "Profile Picture", name: "profile_pic", widget: "image"}
-          - {label: "Bio Statement", name: "bio", widget: "text"}
+          - { label: "Profile Picture", name: "profile_pic", widget: "image" }
+          - { label: "Bio Statement", name: "bio", widget: "text" }
