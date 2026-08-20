@@ -84,6 +84,9 @@
             <a href="#experience" class="hover:text-white transition-colors"
               >Experience</a
             >
+            <a href="#skills" class="hover:text-white transition-colors"
+              >Skills</a
+            >
             <a href="#projects" class="hover:text-white transition-colors"
               >Projects</a
             >
@@ -121,19 +124,23 @@
           >
           <span
             class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
-            >JavaScript</span
-          >
-          <span
-            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
             >C/C++</span
           >
           <span
             class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
-            >Assembly</span
+            >JavaScript (TypeScript)</span
           >
           <span
-            class="bg-brand-navyAccent/20 px-4 py-2 rounded-sm border border-brand-navyAccent/50 text-brand-navyAccent"
-            >Learning: Rust</span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >x86_64 Assembly</span
+          >
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >Rust</span
+          >
+          <span
+            class="bg-brand-obsidian px-4 py-2 rounded-sm border border-brand-obsidianLight text-white"
+            >PHP</span
           >
         </div>
       </div>
@@ -434,6 +441,108 @@
       </div>
     </section>
 
+    <!-- Skills & Technical Toolkit -->
+    <section
+      id="skills"
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">Skills</h2>
+        <p class="text-brand-silver mt-2 text-sm">
+          Tools and frameworks I build with, organized by domain.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Full-Stack Development
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>Vue.js (Vite) + Tailwind CSS</li>
+            <li>React.js</li>
+            <li>Node.js (NestJS, Express.js)</li>
+            <li>PHP</li>
+          </ul>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Mobile Development
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>React Native</li>
+            <li>Flutter</li>
+            <li>Capacitor</li>
+          </ul>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Blockchain
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>JavaScript</li>
+            <li>Rust</li>
+          </ul>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Python
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>Data Science &amp; Machine Learning</li>
+            <li>FastAPI</li>
+          </ul>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            Rust Backend Development
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>Axum</li>
+            <li>Actix Web</li>
+            <li>Rocket</li>
+          </ul>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SKILL CATEGORY -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+        >
+          <h3
+            class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
+          >
+            DevOps
+          </h3>
+          <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
+            <li>Docker</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Projects Database -->
     <section
       id="projects"
@@ -485,9 +594,11 @@
                 >
               </div>
               <p class="text-sm text-brand-silver mb-4">
-                An automated bot that runs inside WhatsApp for trading crypto
-                and gift cards. It is highly secure, requiring a 4-digit PIN and
-                specific text commands to work.
+                A command-driven fintech terminal that runs inside WhatsApp —
+                crypto trading, an OTC gift card exchange, and airtime/data
+                automation, gated behind a 4-digit PIN. JavaScript handles
+                the bot and command layer; Rust handles the parts that touch
+                money.
               </p>
               <a
                 href="https://github.com/garba-the-analyst/MiddleMan-Terminal"
@@ -498,14 +609,47 @@
           </div>
         </div>
 
-        <!-- CATEGORY: SECURITY & SYSTEMS -->
+        <!-- CATEGORY: SYSTEMS PROGRAMMING & SECURITY -->
         <div>
           <h3
             class="text-xl font-bold text-white border-b border-brand-obsidianLight pb-2 mb-6"
           >
-            2. Security & Operating Systems
+            2. Systems Programming & Security
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 🗄️ DATABASE ENTRY: PROJECT -->
+            <div
+              class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h4 class="text-white font-bold text-lg">Dhar</h4>
+                <span
+                  class="bg-brand-navyAccent/20 text-brand-navyAccent text-xs font-mono px-2 py-1 rounded-sm border border-brand-navyAccent/50"
+                  >[IN PROGRESS]</span
+                >
+              </div>
+              <p class="text-sm text-brand-silver mb-4">
+                A general-purpose systems programming language, bootstrapped
+                from nothing. Stage 0 (Forge of Dhar) is a dependency-free
+                compiler written entirely in x86_64 NASM assembly, targeting
+                Linux, Windows, and WASI directly. Stage 1 (Honing Dhar) is
+                self-hosted — its own compiler is written in Dhar — and is
+                where the type system, structs, and pointer/borrow semantics
+                are being built out now.
+              </p>
+              <div class="flex flex-wrap gap-x-4 gap-y-1">
+                <a
+                  href="https://github.com/garba-the-analyst/forge-of-dhar"
+                  class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                  >Stage 0: forge-of-dhar &rarr;</a
+                >
+                <a
+                  href="https://github.com/garba-the-analyst/Honing-Dhar"
+                  class="text-xs font-mono text-brand-navyAccent hover:text-white"
+                  >Stage 1: Honing-Dhar &rarr;</a
+                >
+              </div>
+            </div>
             <!-- 🗄️ DATABASE ENTRY: PROJECT -->
             <div
               class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
@@ -518,9 +662,10 @@
                 >
               </div>
               <p class="text-sm text-brand-silver mb-4">
-                A custom, highly secure computer operating system built on
-                Linux. It is designed to run safely on private networks and
-                features its own built-in AI.
+                A bare-metal x86 operating system built from scratch in C,
+                C++, and Assembly — not a Linux derivative. Designed to run
+                on closed, private networks with Luna-AI, an embedded AI
+                component, built in from the start.
               </p>
               <a
                 href="https://github.com/garba-the-analyst/luna-os"
@@ -807,49 +952,11 @@
           <h3
             class="text-white font-bold mb-4 font-mono border-b border-brand-obsidianLight pb-2"
           >
-            References & Emergency Contacts
+            References
           </h3>
-          <div class="space-y-6 text-sm">
-            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
-            <div>
-              <p>
-                <strong class="text-white"
-                  >Father: Garba Abdullahi, PhD. (Magatakardan Minna)</strong
-                >
-              </p>
-              <p class="text-brand-silver">
-                Registrar, Abdulkadir Kure University Minna.
-              </p>
-              <p class="text-brand-navyAccent font-mono mt-1">
-                +234 803 701 2633
-              </p>
-            </div>
-            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
-            <div>
-              <p>
-                <strong class="text-white"
-                  >Mother: Hajiya. Halimatu Abdulhameed</strong
-                >
-              </p>
-              <p class="text-brand-silver">
-                RIO Chanchaga LGA, NSPHCDA, Minna.
-              </p>
-              <p class="text-brand-navyAccent font-mono mt-1">
-                +234 803 492 1733
-              </p>
-            </div>
-            <!-- 🗄️ DATABASE ENTRY: REFERENCE -->
-            <div>
-              <p>
-                <strong class="text-white"
-                  >Next of Kin / Brother: CAsp. Garba Muhammad Kabir</strong
-                >
-              </p>
-              <p class="text-brand-navyAccent font-mono mt-1">
-                +234 906 650 4477
-              </p>
-            </div>
-          </div>
+          <p class="text-sm text-brand-silver">
+            Professional and academic references available on request.
+          </p>
         </div>
       </div>
     </section>

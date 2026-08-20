@@ -36,7 +36,7 @@ collections:
   - name: "about"
     label: "About & Profile"
     files:
-      - file: "src/_data/about.yml"
+      - file: "src/content/about.yml"
         name: "about_info"
         label: "Profile Information"
         fields:
