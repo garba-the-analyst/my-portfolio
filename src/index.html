@@ -17,7 +17,7 @@
                 silver: "#c0c0c0",
                 silverDark: "#a0a0a0",
                 navy: "#0a192f",
-                navyAccent: "#1d3557",
+                navyAccent: "#60a5fa",
               },
             },
             fontFamily: {
@@ -44,7 +44,7 @@
         background: #000000;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1d3557;
+        background: #60a5fa;
         border-radius: 4px;
       }
       .glass-panel {
@@ -53,15 +53,233 @@
         border-bottom: 1px solid rgba(192, 192, 192, 0.1);
       }
       .db-header {
-        border-left: 4px solid #1d3557;
+        border-left: 4px solid #60a5fa;
         padding-left: 1rem;
         margin-bottom: 2rem;
+      }
+      .sky-layer {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+        background: #000000;
+      }
+      .sky-layer svg {
+        display: block;
+      }
+      .star {
+        animation-name: twinkle;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: var(--base-op, 0.6);
+        }
+        50% {
+          opacity: calc(var(--base-op, 0.6) * 0.2);
+        }
+      }
+      .moon-wrap {
+        position: fixed;
+        top: clamp(16px, 4vh, 40px);
+        right: clamp(16px, 4vw, 48px);
+        width: clamp(64px, 8vw, 120px);
+        z-index: -1;
+        pointer-events: none;
+        animation: moon-float 11s ease-in-out infinite;
+      }
+      .moon-wrap svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      @keyframes moon-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+      .moon-glow {
+        animation: moon-glow-pulse 7s ease-in-out infinite;
+        transform-origin: center;
+      }
+      @keyframes moon-glow-pulse {
+        0%,
+        100% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.08);
+        }
       }
     </style>
   </head>
   <body
     class="font-sans antialiased selection:bg-brand-navyAccent selection:text-white"
   >
+    <!-- Night sky background: pitch-black base, scattered twinkling stars, live moon phase -->
+    <div class="sky-layer" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+        <circle cx="920.8" cy="22.5" r="0.93" fill="#ffffff" opacity="0.46" class="star" style="animation-duration:4.63s;animation-delay:4.06s;--base-op:0.46"/>
+        <circle cx="1284.7" cy="78.2" r="1.11" fill="#ffffff" opacity="0.36" class="star" style="animation-duration:2.92s;animation-delay:3.03s;--base-op:0.36"/>
+        <circle cx="38.2" cy="179.0" r="1.38" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:2.93s;animation-delay:3.54s;--base-op:0.62"/>
+        <circle cx="1165.6" cy="5.8" r="1.57" fill="#ffffff" opacity="0.7" class="star" style="animation-duration:3.32s;animation-delay:0.93s;--base-op:0.7"/>
+        <circle cx="1378.4" cy="302.9" r="0.71" fill="#ffffff" opacity="0.4" class="star" style="animation-duration:5.0s;animation-delay:3.62s;--base-op:0.4"/>
+        <circle cx="1162.3" cy="656.8" r="1.24" fill="#ffffff" opacity="0.84" class="star" style="animation-duration:3.45s;animation-delay:3.31s;--base-op:0.84"/>
+        <circle cx="1194.3" cy="556.7" r="1.63" fill="#ffffff" opacity="0.64" class="star" style="animation-duration:4.53s;animation-delay:0.27s;--base-op:0.64"/>
+        <circle cx="328.2" cy="260.4" r="0.7" fill="#ffffff" opacity="0.47" class="star" style="animation-duration:2.53s;animation-delay:1.67s;--base-op:0.47"/>
+        <circle cx="915.4" cy="328.3" r="1.04" fill="#ffffff" opacity="0.45" class="star" style="animation-duration:3.08s;animation-delay:5.62s;--base-op:0.45"/>
+        <circle cx="933.2" cy="548.2" r="0.81" fill="#ffffff" opacity="0.71" class="star" style="animation-duration:2.74s;animation-delay:2.28s;--base-op:0.71"/>
+        <circle cx="1424.9" cy="576.0" r="1.27" fill="#ffffff" opacity="0.69" class="star" style="animation-duration:4.98s;animation-delay:4.66s;--base-op:0.69"/>
+        <circle cx="329.8" cy="28.9" r="0.98" fill="#ffffff" opacity="0.48" class="star" style="animation-duration:2.9s;animation-delay:5.66s;--base-op:0.48"/>
+        <circle cx="1262.0" cy="283.2" r="1.39" fill="#ffffff" opacity="0.55" class="star" style="animation-duration:5.22s;animation-delay:2.75s;--base-op:0.55"/>
+        <circle cx="381.4" cy="222.0" r="1.27" fill="#ffffff" opacity="0.48" class="star" style="animation-duration:4.13s;animation-delay:5.39s;--base-op:0.48"/>
+        <circle cx="575.1" cy="197.4" r="1.8" fill="#ffffff" opacity="0.6" class="star" style="animation-duration:2.5s;animation-delay:0.28s;--base-op:0.6"/>
+        <circle cx="157.9" cy="564.7" r="1.55" fill="#ffffff" opacity="0.56" class="star" style="animation-duration:2.41s;animation-delay:2.29s;--base-op:0.56"/>
+        <circle cx="1434.4" cy="476.2" r="1.77" fill="#ffffff" opacity="0.78" class="star" style="animation-duration:2.24s;animation-delay:4.32s;--base-op:0.78"/>
+        <circle cx="981.7" cy="483.3" r="0.92" fill="#ffffff" opacity="0.67" class="star" style="animation-duration:2.57s;animation-delay:2.61s;--base-op:0.67"/>
+        <circle cx="653.4" cy="858.4" r="1.65" fill="#ffffff" opacity="0.48" class="star" style="animation-duration:3.85s;animation-delay:1.07s;--base-op:0.48"/>
+        <circle cx="1314.2" cy="783.5" r="0.96" fill="#ffffff" opacity="0.67" class="star" style="animation-duration:4.21s;animation-delay:0.92s;--base-op:0.67"/>
+        <circle cx="1098.0" cy="485.4" r="1.53" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:2.2s;animation-delay:1.94s;--base-op:0.62"/>
+        <circle cx="28.0" cy="836.2" r="1.65" fill="#ffffff" opacity="0.77" class="star" style="animation-duration:3.21s;animation-delay:0.35s;--base-op:0.77"/>
+        <circle cx="1264.3" cy="852.3" r="0.7" fill="#ffffff" opacity="0.59" class="star" style="animation-duration:2.43s;animation-delay:4.56s;--base-op:0.59"/>
+        <circle cx="1102.8" cy="115.6" r="1.17" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:3.07s;animation-delay:5.23s;--base-op:0.62"/>
+        <circle cx="609.3" cy="190.6" r="1.25" fill="#ffffff" opacity="0.71" class="star" style="animation-duration:2.86s;animation-delay:1.87s;--base-op:0.71"/>
+        <circle cx="1433.0" cy="584.9" r="1.13" fill="#ffffff" opacity="0.61" class="star" style="animation-duration:2.6s;animation-delay:1.35s;--base-op:0.61"/>
+        <circle cx="486.8" cy="529.5" r="0.88" fill="#ffffff" opacity="0.46" class="star" style="animation-duration:2.43s;animation-delay:3.79s;--base-op:0.46"/>
+        <circle cx="329.7" cy="814.9" r="1.63" fill="#ffffff" opacity="0.39" class="star" style="animation-duration:2.99s;animation-delay:4.01s;--base-op:0.39"/>
+        <circle cx="308.5" cy="119.1" r="1.72" fill="#ffffff" opacity="0.64" class="star" style="animation-duration:3.76s;animation-delay:4.71s;--base-op:0.64"/>
+        <circle cx="1162.8" cy="171.4" r="0.72" fill="#ffffff" opacity="0.57" class="star" style="animation-duration:3.6s;animation-delay:2.8s;--base-op:0.57"/>
+        <circle cx="1049.9" cy="606.0" r="1.78" fill="#ffffff" opacity="0.4" class="star" style="animation-duration:3.53s;animation-delay:2.04s;--base-op:0.4"/>
+        <circle cx="1240.8" cy="223.8" r="0.83" fill="#ffffff" opacity="0.57" class="star" style="animation-duration:3.59s;animation-delay:1.67s;--base-op:0.57"/>
+        <circle cx="359.7" cy="830.9" r="1.13" fill="#ffffff" opacity="0.78" class="star" style="animation-duration:4.02s;animation-delay:0.3s;--base-op:0.78"/>
+        <circle cx="1439.0" cy="752.4" r="1.76" fill="#ffffff" opacity="0.81" class="star" style="animation-duration:5.0s;animation-delay:1.0s;--base-op:0.81"/>
+        <circle cx="699.3" cy="192.4" r="1.08" fill="#ffffff" opacity="0.38" class="star" style="animation-duration:3.45s;animation-delay:5.91s;--base-op:0.38"/>
+        <circle cx="381.9" cy="705.7" r="1.15" fill="#ffffff" opacity="0.56" class="star" style="animation-duration:5.36s;animation-delay:5.97s;--base-op:0.56"/>
+        <circle cx="800.3" cy="646.6" r="0.79" fill="#ffffff" opacity="0.5" class="star" style="animation-duration:5.4s;animation-delay:3.48s;--base-op:0.5"/>
+        <circle cx="780.8" cy="673.2" r="0.67" fill="#ffffff" opacity="0.64" class="star" style="animation-duration:3.86s;animation-delay:5.12s;--base-op:0.64"/>
+        <circle cx="226.7" cy="864.7" r="0.7" fill="#ffffff" opacity="0.44" class="star" style="animation-duration:4.16s;animation-delay:4.05s;--base-op:0.44"/>
+        <circle cx="338.7" cy="107.9" r="1.67" fill="#ffffff" opacity="0.47" class="star" style="animation-duration:4.16s;animation-delay:3.72s;--base-op:0.47"/>
+        <circle cx="603.7" cy="525.3" r="1.23" fill="#ffffff" opacity="0.82" class="star" style="animation-duration:2.87s;animation-delay:4.3s;--base-op:0.82"/>
+        <circle cx="343.7" cy="356.2" r="1.41" fill="#ffffff" opacity="0.5" class="star" style="animation-duration:3.24s;animation-delay:4.51s;--base-op:0.5"/>
+        <circle cx="104.5" cy="412.5" r="1.8" fill="#ffffff" opacity="0.85" class="star" style="animation-duration:2.44s;animation-delay:1.28s;--base-op:0.85"/>
+        <circle cx="381.9" cy="839.9" r="1.66" fill="#ffffff" opacity="0.79" class="star" style="animation-duration:3.42s;animation-delay:0.95s;--base-op:0.79"/>
+        <circle cx="1200.6" cy="633.2" r="1.33" fill="#ffffff" opacity="0.84" class="star" style="animation-duration:4.36s;animation-delay:0.05s;--base-op:0.84"/>
+        <circle cx="1176.6" cy="269.4" r="1.4" fill="#ffffff" opacity="0.82" class="star" style="animation-duration:2.64s;animation-delay:0.69s;--base-op:0.82"/>
+        <circle cx="154.1" cy="497.9" r="0.93" fill="#ffffff" opacity="0.65" class="star" style="animation-duration:4.57s;animation-delay:1.22s;--base-op:0.65"/>
+        <circle cx="913.3" cy="237.6" r="1.19" fill="#ffffff" opacity="0.8" class="star" style="animation-duration:4.99s;animation-delay:0.55s;--base-op:0.8"/>
+        <circle cx="609.9" cy="249.0" r="0.6" fill="#ffffff" opacity="0.74" class="star" style="animation-duration:4.3s;animation-delay:1.57s;--base-op:0.74"/>
+        <circle cx="1067.4" cy="496.5" r="1.11" fill="#ffffff" opacity="0.35" class="star" style="animation-duration:2.45s;animation-delay:5.3s;--base-op:0.35"/>
+        <circle cx="1301.7" cy="491.0" r="1.6" fill="#ffffff" opacity="0.64" class="star" style="animation-duration:2.69s;animation-delay:0.76s;--base-op:0.64"/>
+        <circle cx="443.9" cy="809.1" r="1.56" fill="#ffffff" opacity="0.78" class="star" style="animation-duration:5.17s;animation-delay:1.26s;--base-op:0.78"/>
+        <circle cx="359.3" cy="92.5" r="1.54" fill="#ffffff" opacity="0.79" class="star" style="animation-duration:3.54s;animation-delay:3.72s;--base-op:0.79"/>
+        <circle cx="222.6" cy="836.9" r="1.64" fill="#ffffff" opacity="0.84" class="star" style="animation-duration:4.88s;animation-delay:5.29s;--base-op:0.84"/>
+        <circle cx="35.7" cy="662.9" r="1.0" fill="#ffffff" opacity="0.82" class="star" style="animation-duration:4.85s;animation-delay:5.18s;--base-op:0.82"/>
+        <circle cx="1167.5" cy="240.1" r="1.54" fill="#ffffff" opacity="0.4" class="star" style="animation-duration:5.08s;animation-delay:5.15s;--base-op:0.4"/>
+        <circle cx="320.3" cy="734.9" r="1.15" fill="#ffffff" opacity="0.5" class="star" style="animation-duration:4.82s;animation-delay:1.37s;--base-op:0.5"/>
+        <circle cx="34.1" cy="173.8" r="0.99" fill="#ffffff" opacity="0.78" class="star" style="animation-duration:5.39s;animation-delay:1.67s;--base-op:0.78"/>
+        <circle cx="923.7" cy="359.7" r="1.78" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:5.3s;animation-delay:0.69s;--base-op:0.62"/>
+        <circle cx="1397.4" cy="160.7" r="1.76" fill="#ffffff" opacity="0.48" class="star" style="animation-duration:2.56s;animation-delay:2.61s;--base-op:0.48"/>
+        <circle cx="1049.1" cy="282.3" r="1.33" fill="#ffffff" opacity="0.61" class="star" style="animation-duration:3.47s;animation-delay:3.46s;--base-op:0.61"/>
+        <circle cx="366.8" cy="637.9" r="0.6" fill="#ffffff" opacity="0.81" class="star" style="animation-duration:3.98s;animation-delay:4.32s;--base-op:0.81"/>
+        <circle cx="1068.4" cy="603.6" r="1.04" fill="#ffffff" opacity="0.38" class="star" style="animation-duration:4.39s;animation-delay:1.98s;--base-op:0.38"/>
+        <circle cx="452.0" cy="763.2" r="1.46" fill="#ffffff" opacity="0.5" class="star" style="animation-duration:3.22s;animation-delay:2.45s;--base-op:0.5"/>
+        <circle cx="579.5" cy="266.1" r="0.75" fill="#ffffff" opacity="0.56" class="star" style="animation-duration:5.3s;animation-delay:4.06s;--base-op:0.56"/>
+        <circle cx="1300.0" cy="554.0" r="0.96" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:2.2s;animation-delay:1.72s;--base-op:0.62"/>
+        <circle cx="619.0" cy="522.0" r="1.39" fill="#ffffff" opacity="0.58" class="star" style="animation-duration:3.66s;animation-delay:1.28s;--base-op:0.58"/>
+        <circle cx="681.4" cy="811.1" r="1.56" fill="#ffffff" opacity="0.43" class="star" style="animation-duration:2.48s;animation-delay:3.09s;--base-op:0.43"/>
+        <circle cx="911.4" cy="301.7" r="1.58" fill="#ffffff" opacity="0.73" class="star" style="animation-duration:4.42s;animation-delay:1.35s;--base-op:0.73"/>
+        <circle cx="286.7" cy="22.0" r="0.89" fill="#ffffff" opacity="0.59" class="star" style="animation-duration:5.0s;animation-delay:0.44s;--base-op:0.59"/>
+        <circle cx="596.8" cy="566.8" r="0.83" fill="#ffffff" opacity="0.7" class="star" style="animation-duration:3.83s;animation-delay:1.46s;--base-op:0.7"/>
+        <circle cx="944.7" cy="5.0" r="1.5" fill="#ffffff" opacity="0.74" class="star" style="animation-duration:2.55s;animation-delay:2.55s;--base-op:0.74"/>
+        <circle cx="253.3" cy="862.2" r="1.22" fill="#ffffff" opacity="0.38" class="star" style="animation-duration:3.02s;animation-delay:5.09s;--base-op:0.38"/>
+        <circle cx="657.3" cy="721.3" r="1.4" fill="#ffffff" opacity="0.84" class="star" style="animation-duration:4.16s;animation-delay:5.7s;--base-op:0.84"/>
+        <circle cx="1283.7" cy="551.4" r="1.46" fill="#ffffff" opacity="0.6" class="star" style="animation-duration:4.94s;animation-delay:3.29s;--base-op:0.6"/>
+        <circle cx="1292.0" cy="669.3" r="1.17" fill="#ffffff" opacity="0.48" class="star" style="animation-duration:3.02s;animation-delay:3.83s;--base-op:0.48"/>
+        <circle cx="1102.8" cy="469.2" r="1.35" fill="#ffffff" opacity="0.49" class="star" style="animation-duration:2.46s;animation-delay:1.71s;--base-op:0.49"/>
+        <circle cx="391.3" cy="287.7" r="1.25" fill="#ffffff" opacity="0.42" class="star" style="animation-duration:2.96s;animation-delay:4.16s;--base-op:0.42"/>
+        <circle cx="1017.2" cy="57.8" r="1.09" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:3.57s;animation-delay:1.24s;--base-op:0.62"/>
+        <circle cx="605.0" cy="814.4" r="1.3" fill="#ffffff" opacity="0.7" class="star" style="animation-duration:5.03s;animation-delay:4.59s;--base-op:0.7"/>
+        <circle cx="547.7" cy="5.3" r="1.02" fill="#ffffff" opacity="0.73" class="star" style="animation-duration:5.02s;animation-delay:5.72s;--base-op:0.73"/>
+        <circle cx="603.4" cy="672.8" r="1.26" fill="#ffffff" opacity="0.65" class="star" style="animation-duration:2.93s;animation-delay:1.32s;--base-op:0.65"/>
+        <circle cx="627.6" cy="26.1" r="1.0" fill="#ffffff" opacity="0.69" class="star" style="animation-duration:3.53s;animation-delay:0.99s;--base-op:0.69"/>
+        <circle cx="673.0" cy="114.9" r="1.35" fill="#ffffff" opacity="0.36" class="star" style="animation-duration:3.5s;animation-delay:3.39s;--base-op:0.36"/>
+        <circle cx="39.0" cy="578.5" r="0.76" fill="#ffffff" opacity="0.58" class="star" style="animation-duration:2.37s;animation-delay:2.27s;--base-op:0.58"/>
+        <circle cx="304.8" cy="294.2" r="1.51" fill="#ffffff" opacity="0.54" class="star" style="animation-duration:4.68s;animation-delay:4.99s;--base-op:0.54"/>
+        <circle cx="363.3" cy="73.7" r="0.62" fill="#ffffff" opacity="0.62" class="star" style="animation-duration:5.5s;animation-delay:2.1s;--base-op:0.62"/>
+        <circle cx="936.2" cy="703.1" r="1.38" fill="#ffffff" opacity="0.73" class="star" style="animation-duration:5.33s;animation-delay:1.2s;--base-op:0.73"/>
+        <circle cx="29.3" cy="137.1" r="0.75" fill="#ffffff" opacity="0.68" class="star" style="animation-duration:4.06s;animation-delay:1.31s;--base-op:0.68"/>
+        <circle cx="1007.2" cy="690.2" r="0.8" fill="#ffffff" opacity="0.65" class="star" style="animation-duration:4.67s;animation-delay:0.69s;--base-op:0.65"/>
+        <circle cx="1179.8" cy="520.9" r="2.09" fill="#ffffff" opacity="0.61" class="star" style="animation-duration:3.94s;animation-delay:4.06s;--base-op:0.61"/>
+        <circle cx="1379.8" cy="214.2" r="2.57" fill="#ffffff" opacity="0.63" class="star" style="animation-duration:5.07s;animation-delay:3.76s;--base-op:0.63"/>
+        <circle cx="146.7" cy="417.1" r="2.68" fill="#ffffff" opacity="0.81" class="star" style="animation-duration:3.36s;animation-delay:5.9s;--base-op:0.81"/>
+        <circle cx="1127.0" cy="187.5" r="2.34" fill="#ffffff" opacity="0.73" class="star" style="animation-duration:4.52s;animation-delay:2.05s;--base-op:0.73"/>
+        <circle cx="1223.4" cy="444.1" r="2.08" fill="#ffffff" opacity="0.94" class="star" style="animation-duration:4.91s;animation-delay:4.97s;--base-op:0.94"/>
+        <circle cx="1018.5" cy="235.2" r="2.59" fill="#ffffff" opacity="0.94" class="star" style="animation-duration:3.81s;animation-delay:4.85s;--base-op:0.94"/>
+        <circle cx="775.0" cy="261.1" r="2.35" fill="#ffffff" opacity="0.86" class="star" style="animation-duration:3.81s;animation-delay:5.11s;--base-op:0.86"/>
+      </svg>
+    </div>
+    <div class="moon-wrap" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e8e6df" stop-opacity="0.4" />
+            <stop offset="45%" stop-color="#e8e6df" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#e8e6df" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <circle class="moon-glow" cx="100" cy="100" r="148" fill="url(#moonGlow)" />
+        <circle cx="100" cy="100" r="62" fill="#1b1f2b" />
+        <path
+          id="moon-shape"
+          d="M 100,38 A 62,62 0 0,1 100,162 A 52.067,62 0 0,1 100,38 Z"
+          fill="#eeece4"
+        />
+        <g opacity="0.16" fill="#9a988f">
+          <ellipse cx="84" cy="76" rx="8" ry="6.5" />
+          <ellipse cx="112" cy="106" rx="5.5" ry="4.5" />
+          <ellipse cx="93" cy="128" rx="4.5" ry="3.5" />
+          <ellipse cx="122" cy="88" rx="3.5" ry="3" />
+        </g>
+      </svg>
+    </div>
+    <script>
+      // Computes today's real moon phase (visitor's local date) and updates the SVG path
+      // accordingly, so the illustration always reflects the current phase, not a fixed snapshot.
+      (function () {
+        var pathEl = document.getElementById("moon-shape");
+        if (!pathEl) return;
+        var R = 62,
+          CX = 100,
+          CY = 100;
+        var refNewMoon = Date.UTC(2000, 0, 6, 18, 14, 0); // known reference new moon
+        var synodicMonth = 29.530588861; // days, mean lunar cycle length
+        var now = new Date();
+        var daysSince = (now.getTime() - refNewMoon) / 86400000;
+        var phase = (((daysSince % synodicMonth) + synodicMonth) % synodicMonth) / synodicMonth; // 0..1
+        var theta = 2 * Math.PI * phase;
+        var x = R * Math.cos(theta);
+        var waxing = phase <= 0.5;
+        var rx = Math.abs(x).toFixed(3);
+        var firstSweep = waxing ? 1 : 0;
+        var secondSweep = waxing ? (x < 0 ? 1 : 0) : x < 0 ? 0 : 1;
+        var top = CX + "," + (CY - R);
+        var bot = CX + "," + (CY + R);
+        var d =
+          "M " + top + " A " + R + "," + R + " 0 0," + firstSweep + " " + bot +
+          " A " + rx + "," + R + " 0 0," + secondSweep + " " + top + " Z";
+        pathEl.setAttribute("d", d);
+      })();
+    </script>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-panel">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -197,8 +415,24 @@
             Software Development
           </h3>
           <p class="text-sm text-brand-silver">
-            End-to-end full-stack software engineering, focusing on secure,
-            reliable, and production-ready applications.
+            Building and shipping full-stack applications end-to-end, from a
+            client's first spec to a production-ready release.
+          </p>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i
+            class="fa-solid fa-diagram-project text-2xl text-brand-navyAccent mb-4"
+          ></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Software Engineering
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Systems architecture, technical strategy, and engineering rigor
+            for products that need to hold up at scale — the discipline
+            behind the code, not just the code itself.
           </p>
         </div>
         <!-- 🗄️ DATABASE ENTRY: SERVICE -->
@@ -255,6 +489,22 @@
           <p class="text-sm text-brand-silver">
             Smart contract development, on-chain risk tooling, and Web3
             integrations across EVM and Solana ecosystems.
+          </p>
+        </div>
+        <!-- 🗄️ DATABASE ENTRY: SERVICE -->
+        <div
+          class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight hover:border-brand-navyAccent transition-colors"
+        >
+          <i
+            class="fa-solid fa-list-check text-2xl text-brand-navyAccent mb-4"
+          ></i>
+          <h3 class="text-white font-bold text-lg mb-2 font-mono">
+            Project Management
+          </h3>
+          <p class="text-sm text-brand-silver">
+            Planning, scoping, and shepherding technical projects from idea
+            to delivery — timelines, priorities, and communication kept
+            tight.
           </p>
         </div>
       </div>
@@ -343,11 +593,19 @@
             Hobbies & Interests
           </h3>
           <ul class="space-y-2 text-sm list-disc list-inside">
-            <li>Reading History</li>
-            <li>Hiking & Outdoors</li>
-            <li>Watching Movies & Documentaries</li>
-            <li>Listening to Music</li>
-            <li>Spending time with loved ones</li>
+            <li>Astronomy & Stargazing</li>
+            <li>Philosophy</li>
+            <li>Rocket Science, Space Technology & Propulsion</li>
+            <li>Travel</li>
+            <li>Cooking</li>
+            <li>Tea</li>
+            <li>Geography</li>
+            <li>History</li>
+            <li>Religions, Faiths & Beliefs</li>
+            <li>Cultures</li>
+            <li>Martial Arts</li>
+            <li>Obscure Knowledge</li>
+            <li>Conspiracy Theories</li>
           </ul>
         </div>
       </div>
@@ -1012,7 +1270,7 @@
     >
       <div class="db-header">
         <h2 class="text-3xl font-bold text-white font-mono">
-          Strategic Ambitions & Discipline
+          Ambitions & Discipline
         </h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1020,7 +1278,7 @@
           class="bg-brand-obsidian p-6 rounded-sm border border-brand-obsidianLight"
         >
           <h3 class="text-white font-bold mb-4 font-mono">
-            Core Goals & Interests
+            Goals & Interests
           </h3>
           <ul class="space-y-4 text-sm text-brand-silver">
             <li>
@@ -1052,9 +1310,12 @@
             stress.
           </p>
           <ul class="space-y-2 text-sm text-brand-silver list-disc list-inside">
-            <li>Dedicated practitioner of Taekwondo.</li>
+            <li>
+              Trained in Taekwondo years ago — still carry some of it, and
+              planning to resume soon.
+            </li>
             <li>Continuous training in powerlifting.</li>
-            <li>Advanced calisthenics and plyometrics.</li>
+            <li>Calisthenics and plyometrics.</li>
             <li>Structured military-style physical conditioning.</li>
           </ul>
         </div>
@@ -1067,7 +1328,7 @@
         <div>
           <div class="db-header">
             <h2 class="text-3xl font-bold text-white font-mono">
-              Establish Connection
+              My contact information
             </h2>
           </div>
           <div class="space-y-4 font-mono text-sm">
@@ -1161,5 +1422,352 @@
         </p>
       </div>
     </footer>
+    <!-- Entry engagement modal: visitor message + hire/collaborate inquiry.
+         Forms are real static HTML (Netlify Forms detects them at build/deploy
+         time), styled as a JS-controlled popup. Submissions land in the
+         Netlify dashboard under Forms; turn on email notifications there
+         to get pinged per submission. -->
+    <div
+      id="entry-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+      style="background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px)"
+    >
+      <div
+        class="bg-brand-obsidian border border-brand-obsidianLight rounded-sm max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto"
+      >
+        <button
+          id="entry-modal-close"
+          class="absolute top-4 right-4 text-brand-silverDark hover:text-white"
+          aria-label="Close"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Step 1: intent picker -->
+        <div id="entry-step-picker">
+          <h3 class="text-white font-bold text-xl font-mono mb-2">
+            Thanks for stopping by
+          </h3>
+          <p class="text-sm text-brand-silver mb-6">
+            What brings you here today?
+          </p>
+          <div class="space-y-3">
+            <button
+              type="button"
+              data-intent="message"
+              class="entry-choice w-full text-left bg-brand-obsidianLight hover:border-brand-navyAccent border border-transparent rounded-sm p-4 transition-colors"
+            >
+              <span class="block text-white font-semibold"
+                >Just leave a message</span
+              >
+              <span class="block text-xs text-brand-silverDark mt-1"
+                >Say hi, ask a question, or leave feedback</span
+              >
+            </button>
+            <button
+              type="button"
+              data-intent="hire"
+              class="entry-choice w-full text-left bg-brand-obsidianLight hover:border-brand-navyAccent border border-transparent rounded-sm p-4 transition-colors"
+            >
+              <span class="block text-white font-semibold"
+                >Hire me or collaborate</span
+              >
+              <span class="block text-xs text-brand-silverDark mt-1"
+                >Full-time, part-time, freelance, or a project</span
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2a: leave a message -->
+        <form
+          id="form-message"
+          name="visitor-message"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="hidden entry-form"
+        >
+          <input type="hidden" name="form-name" value="visitor-message" />
+          <p class="hidden">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+          <h3 class="text-white font-bold text-xl font-mono mb-4">
+            Leave a message
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Name</label
+              >
+              <input
+                required
+                name="name"
+                type="text"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Email (optional)</label
+              >
+              <input
+                name="email"
+                type="email"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Message</label
+              >
+              <textarea
+                required
+                name="message"
+                rows="4"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-6">
+            <button
+              type="button"
+              class="entry-back text-xs text-brand-silverDark hover:text-white font-mono"
+            >
+              &larr; back
+            </button>
+            <button
+              type="submit"
+              class="ml-auto bg-brand-navyAccent text-brand-obsidian font-bold text-sm px-5 py-2 rounded-sm hover:opacity-90 transition-opacity"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+
+        <!-- Step 2b: hire / collaborate -->
+        <form
+          id="form-hire"
+          name="hire-collab-inquiry"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="hidden entry-form"
+        >
+          <input type="hidden" name="form-name" value="hire-collab-inquiry" />
+          <p class="hidden">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+          <h3 class="text-white font-bold text-xl font-mono mb-4">
+            Let's work together
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Name</label
+              >
+              <input
+                required
+                name="name"
+                type="text"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Email</label
+              >
+              <input
+                required
+                name="email"
+                type="email"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Phone / WhatsApp (optional)</label
+              >
+              <input
+                name="phone"
+                type="text"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >I'm interested in&hellip;</label
+              >
+              <select
+                required
+                name="engagement_type"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              >
+                <option value="">Select one</option>
+                <option value="Full-time">Full-time role</option>
+                <option value="Part-time">Part-time role</option>
+                <option value="Freelance">Freelance / contract work</option>
+                <option value="Collaboration">
+                  Collaboration / partnership
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-brand-silverDark mb-1"
+                >Tell me more</label
+              >
+              <textarea
+                required
+                name="details"
+                rows="4"
+                class="w-full bg-brand-obsidianLight border border-brand-obsidianLight focus:border-brand-navyAccent rounded-sm px-3 py-2 text-sm text-white outline-none"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-6">
+            <button
+              type="button"
+              class="entry-back text-xs text-brand-silverDark hover:text-white font-mono"
+            >
+              &larr; back
+            </button>
+            <button
+              type="submit"
+              class="ml-auto bg-brand-navyAccent text-brand-obsidian font-bold text-sm px-5 py-2 rounded-sm hover:opacity-90 transition-opacity"
+            >
+              Send inquiry
+            </button>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div id="entry-success" class="hidden text-center py-6">
+          <h3 class="text-white font-bold text-lg mb-2">
+            Got it, thank you.
+          </h3>
+          <p class="text-sm text-brand-silver" id="entry-success-msg">
+            I'll get back to you soon.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reopen button: brings the modal back after it's been dismissed -->
+    <button
+      id="entry-reopen-btn"
+      class="fixed bottom-6 right-6 z-40 bg-brand-obsidian border border-brand-obsidianLight hover:border-brand-navyAccent text-white text-sm font-mono px-4 py-3 rounded-sm shadow-lg transition-colors"
+      aria-label="Get in touch"
+    >
+      <i class="fa-solid fa-message text-brand-navyAccent mr-2"></i>Get in
+      touch
+    </button>
+
+    <script>
+      (function () {
+        var modal = document.getElementById("entry-modal");
+        var picker = document.getElementById("entry-step-picker");
+        var formMessage = document.getElementById("form-message");
+        var formHire = document.getElementById("form-hire");
+        var success = document.getElementById("entry-success");
+        var successMsg = document.getElementById("entry-success-msg");
+        var closeBtn = document.getElementById("entry-modal-close");
+        var reopenBtn = document.getElementById("entry-reopen-btn");
+
+        function showModal() {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+        }
+        function hideModal() {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }
+        function resetToPicker() {
+          picker.classList.remove("hidden");
+          formMessage.classList.add("hidden");
+          formHire.classList.add("hidden");
+          success.classList.add("hidden");
+        }
+
+        if (!sessionStorage.getItem("entryPromptSeen")) {
+          setTimeout(function () {
+            showModal();
+            sessionStorage.setItem("entryPromptSeen", "1");
+          }, 5000);
+        }
+
+        closeBtn.addEventListener("click", hideModal);
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) hideModal();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+            hideModal();
+          }
+        });
+        reopenBtn.addEventListener("click", function () {
+          resetToPicker();
+          showModal();
+        });
+
+        document.querySelectorAll(".entry-choice").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            picker.classList.add("hidden");
+            if (btn.dataset.intent === "message") {
+              formMessage.classList.remove("hidden");
+            } else {
+              formHire.classList.remove("hidden");
+            }
+          });
+        });
+
+        document.querySelectorAll(".entry-back").forEach(function (btn) {
+          btn.addEventListener("click", resetToPicker);
+        });
+
+        function encode(data) {
+          return Object.keys(data)
+            .map(function (k) {
+              return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+            })
+            .join("&");
+        }
+
+        function handleSubmit(form, successText) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var formData = {};
+            new FormData(form).forEach(function (value, key) {
+              formData[key] = value;
+            });
+            var submitBtn = form.querySelector('button[type="submit"]');
+            var originalLabel = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+            fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: encode(formData),
+            })
+              .then(function () {
+                form.classList.add("hidden");
+                successMsg.textContent = successText;
+                success.classList.remove("hidden");
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalLabel;
+              })
+              .catch(function () {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Try again";
+              });
+          });
+        }
+
+        handleSubmit(formMessage, "Thanks for the note \u2014 I'll read it soon.");
+        handleSubmit(formHire, "Thanks for reaching out \u2014 I'll get back to you soon.");
+      })();
+    </script>
+
   </body>
+
 </html>
