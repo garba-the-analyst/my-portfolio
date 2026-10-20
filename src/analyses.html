@@ -1,0 +1,866 @@
+---
+permalink: /analyses/
+eleventyExcludeFromCollections: true
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Analytics | Garba-The-Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                black: "#000000",
+                obsidian: "#121212",
+                obsidianLight: "#1e1e1e",
+                silver: "#c0c0c0",
+                silverDark: "#a0a0a0",
+                navy: "#0a192f",
+                navyAccent: "#60a5fa",
+              },
+            },
+            fontFamily: {
+              mono: ['"Fira Code"', '"Courier New"', "monospace"],
+              sans: ['"Inter"', "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+      body {
+        background-color: #000000;
+        color: #c0c0c0;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #60a5fa;
+        border-radius: 4px;
+      }
+      .glass-panel {
+        background: rgba(18, 18, 18, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+      }
+      .db-header {
+        border-left: 4px solid #60a5fa;
+        padding-left: 1rem;
+        margin-bottom: 2rem;
+      }
+      .study-card {
+        background: #121212;
+        border: 1px solid #1e1e1e;
+        border-radius: 0.125rem;
+      }
+      .stat-badge {
+        background: rgba(96, 165, 250, 0.08);
+        border: 1px solid rgba(96, 165, 250, 0.35);
+        color: #60a5fa;
+        font-family: "Fira Code", "Courier New", monospace;
+        border-radius: 0.125rem;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+      .sig-badge {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        color: #34d399;
+      }
+      .chart-box {
+        position: relative;
+        height: 300px;
+        min-width: 0;
+      }
+      .pipeline-step {
+        font-family: "Fira Code", "Courier New", monospace;
+        font-size: 0.7rem;
+        color: #a0a0a0;
+        border: 1px solid #1e1e1e;
+        background: #121212;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.125rem;
+      }
+      .arrow {
+        color: #60a5fa;
+        font-size: 0.7rem;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+    <!-- NAV -->
+    <nav class="glass-panel fixed top-0 left-0 right-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-chart-line text-brand-navyAccent"></i>
+          <a href="/" class="font-mono text-white font-bold tracking-tight"
+            >Garba-The-Analyst</a
+          >
+          <span class="text-brand-silverDark font-mono text-xs hidden sm:inline"
+            >/ research analytics</span
+          >
+        </div>
+        <div class="flex items-center gap-6 text-sm">
+          <a href="/" class="text-brand-silver hover:text-white transition-colors"
+            >Home</a
+          >
+          <a
+            href="https://github.com/garba-the-analyst/garba-the-analyst-data-analysis-portfolio"
+            target="_blank"
+            class="text-brand-navyAccent hover:text-white transition-colors font-mono text-xs"
+            ><i class="fa-brands fa-github"></i> GitHub Repo</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section
+      class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h2 class="text-3xl font-bold text-white font-mono">
+          Research Analytics Dashboard
+        </h2>
+        <p class="text-brand-silver mt-2 text-sm max-w-3xl">
+          Production-grade survey analytics delivered for real research
+          clients at the Federal University of Health Sciences, Ila-Orangun
+          (FUHSI) — four studies, 1,471 respondents. Every headline number on
+          this page comes from the verified statistical pipeline: full
+          methodology, aggregate tables and figures are open in
+          <a
+            href="https://github.com/garba-the-analyst/garba-the-analyst-data-analysis-portfolio"
+            target="_blank"
+            class="text-brand-navyAccent hover:text-white"
+            >the analysis repository</a
+          >.
+        </p>
+      </div>
+
+      <!-- PIPELINE STRIP -->
+      <div
+        class="flex flex-wrap items-center gap-2 mb-6 font-mono text-[0.7rem]"
+      >
+        <span class="pipeline-step"
+          ><i class="fa-solid fa-database mr-1 text-brand-navyAccent"></i>raw
+          survey data</span
+        >
+        <span class="arrow">→</span>
+        <span class="pipeline-step">cleaning &amp; scoring</span>
+        <span class="arrow">→</span>
+        <span class="pipeline-step">reliability (α / KR-20)</span>
+        <span class="arrow">→</span>
+        <span class="pipeline-step"
+          >χ² · Kruskal-Wallis · logistic regression</span
+        >
+        <span class="arrow">→</span>
+        <span class="pipeline-step">figures &amp; workbook</span>
+        <span class="arrow">→</span>
+        <span class="pipeline-step"
+          ><i class="fa-solid fa-file-lines mr-1 text-brand-navyAccent"></i
+          >APA report</span
+        >
+      </div>
+
+      <!-- TOTalS STRIP -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="study-card p-4">
+          <div class="text-2xl font-bold text-white font-mono">1,471</div>
+          <div class="text-xs text-brand-silverDark font-mono">
+            RESPONDENTS ANALYSED
+          </div>
+        </div>
+        <div class="study-card p-4">
+          <div class="text-2xl font-bold text-white font-mono">4</div>
+          <div class="text-xs text-brand-silverDark font-mono">
+            FULL STUDIES DELIVERED
+          </div>
+        </div>
+        <div class="study-card p-4">
+          <div class="text-2xl font-bold text-white font-mono">95</div>
+          <div class="text-xs text-brand-silverDark font-mono">
+            AGGREGATE RESULT TABLES
+          </div>
+        </div>
+        <div class="study-card p-4">
+          <div class="text-2xl font-bold text-white font-mono">66</div>
+          <div class="text-xs text-brand-silverDark font-mono">
+            PUBLICATION-STYLE FIGURES
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY 1: MALARIA -->
+    <section
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h3 class="text-2xl font-bold text-white font-mono">
+          1 · Malaria Prevention KAP
+        </h3>
+        <p class="text-brand-silver text-sm mt-1">
+          Knowledge &amp; practice of malaria prevention among undergraduates —
+          <span class="text-brand-navyAccent">N = 321</span> · Orem's
+          Self-Care Deficit framework
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="stat-badge">knowledge 8.78/10 — good: 83.8%</span>
+        <span class="stat-badge">practice 29.39/40 — good: 49.5%</span>
+        <span class="stat-badge sig-badge">H1 χ²=20.75, p=0.0004 ✓ REJECT H0</span>
+        <span class="stat-badge sig-badge">Spearman ρ=0.39, p&lt;0.001</span>
+        <span class="stat-badge">ITN ownership 50.2%</span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ THE KNOWLEDGE–PRACTICE GAP — category distributions
+          </p>
+          <div class="chart-box">
+            <canvas id="malariaCats"></canvas>
+          </div>
+          <p class="text-xs text-brand-silverDark mt-3">
+            83.8% hold good knowledge, but only 49.5% translate it into good
+            practice — the gap is structural (comfort, cost, net
+            maintenance), not educational.
+          </p>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ THE ITN LIFECYCLE FUNNEL — where each stage loses half
+          </p>
+          <div class="chart-box">
+            <canvas id="malariaFunnel"></canvas>
+          </div>
+          <p class="text-xs text-brand-silverDark mt-3">
+            Ownership (50.2%) → nightly use (5.3%) → replacement intent
+            (44.2%): every stage of the net lifecycle leaks. 45.5% report
+            discomfort sleeping under nets; 200 Level is a practice dip
+            (27.6 → 25.7) despite higher knowledge.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            📈 KNOWLEDGE RISES WITH LEVEL, THEN PLATEAUS (Kruskal-Wallis H=25.3)
+          </p>
+          <div class="chart-box">
+            <canvas id="malariaLevel"></canvas>
+          </div>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-sm text-brand-silver mb-3">
+            <i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i>Smart
+            insights
+          </p>
+          <ul class="text-sm text-brand-silver space-y-2 list-none">
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >98.1% know nets are the best defence, 50.2% own one, 5.3%
+              sleep under one nightly — the failure point is comfort &amp;
+              maintenance, not awareness.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Each extra correct knowledge item gives
+              <b class="text-white">OR 1.51</b> for ITN ownership (95% CI
+              1.27–1.79) — knowledge works, but saturates.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >The 200-Level practice dip is the actionable anomaly — a
+              targeted refresher beats more 100L orientation.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY 2: SUBSTANCE ABUSE -->
+    <section
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h3 class="text-2xl font-bold text-white font-mono">
+          2 · Substance Abuse &amp; Perceived Health Implications
+        </h3>
+        <p class="text-brand-silver text-sm mt-1">
+          Prevalence, drivers &amp; harm awareness —
+          <span class="text-brand-navyAccent">N = 395</span> · Health Belief
+          Model framework
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="stat-badge">ever-use 15.9%</span>
+        <span class="stat-badge">past-3-month 9.4%</span>
+        <span class="stat-badge">problem use 5.6% (CAGE-type)</span>
+        <span class="stat-badge sig-badge">α 0.91–0.94 across scales</span>
+        <span class="stat-badge sig-badge">male aOR=10.13, p=0.001</span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ PREVALENCE CASCADE — use concentrates fast
+          </p>
+          <div class="chart-box">
+            <canvas id="subCascade"></canvas>
+          </div>
+          <p class="text-xs text-brand-silverDark mt-3">
+            A leaky pipeline: ever-use (15.9%) narrows to current use
+            (9.4%) and a concentrated problem group (5.6%) — a
+            brief-intervention target of ~22/395 students.
+          </p>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ WHAT SUBSTANCES — alcohol is the gateway (share of sample)
+          </p>
+          <div class="chart-box">
+            <canvas id="subSubstances"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            📈 TOP DRIVERS OF USE (strongly agree/agree) — peer pressure ~97.7%
+            is near-saturated
+          </p>
+          <div class="chart-box">
+            <canvas id="subFactors"></canvas>
+          </div>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-sm text-brand-silver mb-3">
+            <i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i>Smart
+            insights
+          </p>
+          <ul class="text-sm text-brand-silver space-y-2">
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >An awareness–behaviour gap, not a deficit: harm recognition
+              ≥95.5% on all 12 items (mean 4.54/5), prevention endorsement
+              ~97% — information campaigns are already saturated.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Male students carry ~<b class="text-white">10× the odds</b>
+              of ever-use — gender-targeted programming is statistically
+              justified, not optional.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Peer pressure at 97.7% means the lever is normative
+              campaigns ("most students don't use") delivered peer-to-peer.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY 3: SDL -->
+    <section
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h3 class="text-2xl font-bold text-white font-mono">
+          3 · Internet Access &amp; Self-Directed Learning Readiness
+        </h3>
+        <p class="text-brand-silver text-sm mt-1">
+          Digital equity &amp; SDL (SDLRSNE, α=0.92) —
+          <span class="text-brand-navyAccent">N = 379</span>
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="stat-badge">device ownership 99.5%</span>
+        <span class="stat-badge">mobile-data dependent 93.4%</span>
+        <span class="stat-badge">daily access 66.0%</span>
+        <span class="stat-badge">SDL 100.8/120 — high: 82.6%</span>
+        <span class="stat-badge sig-badge">H1 Pearson r=0.371, p&lt;0.001 ✓</span>
+        <span class="stat-badge sig-badge">H2 H=11.745, p=0.0083 ✓</span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ SDL READINESS DECLINES WITH SENORITY (Kruskal-Wallis,
+            Bonferroni: 200 vs 400 p=0.016)
+          </p>
+          <div class="chart-box">
+            <canvas id="sdlLevel"></canvas>
+          </div>
+          <p class="text-xs text-brand-silverDark mt-3">
+            100L 103.6 → 400L 99.0: "more experienced = more self-directed"
+            is empirically backwards in this sample — 300/400L scaffolding
+            is the priority.
+          </p>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ SDL SUBSCALES — self-control is the weak spot (scale 1–5)
+          </p>
+          <div class="chart-box">
+            <canvas id="sdlSubscales"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            📈 THE ACCESS PARADOX — devices are universal, quality isn't
+          </p>
+          <div class="chart-box">
+            <canvas id="sdlAccess"></canvas>
+          </div>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-sm text-brand-silver mb-3">
+            <i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i>Smart
+            insights
+          </p>
+          <ul class="text-sm text-brand-silver space-y-2">
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >With 99.5% device ownership, the differentiator is
+              <b class="text-white">what kind</b> of access: 93.4% depend on
+              personal mobile data and only 78.4% call it reliable —
+              campus Wi-Fi investment beats device giveaways.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Frequency of access (ρ≈0.30) correlates with SDL readiness
+              better than duration — a consistent daily study rhythm beats
+              occasional long sessions.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Internet access predicts SDL readiness (r=0.371) — but with
+              IT support, not curricula: the 82.6% "high readiness" band is
+              ready for peer-mentoring pilots today.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY 4: MENSTRUAL KAP -->
+    <section
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-brand-obsidianLight"
+    >
+      <div class="db-header">
+        <h3 class="text-2xl font-bold text-white font-mono">
+          4 · Menstrual Irregularities — KAP &amp; Health-Seeking Behaviour
+        </h3>
+        <p class="text-brand-silver text-sm mt-1">
+          Knowledge, attitudes &amp; care-seeking among female undergraduates —
+          <span class="text-brand-navyAccent">N = 376</span> · HBM framework
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="stat-badge">knowledge 10.63/12 — good: 69.1%</span>
+        <span class="stat-badge">positive attitude 52.7%</span>
+        <span class="stat-badge">ever-experienced 68.4%</span>
+        <span class="stat-badge sig-badge">H1 χ²=6.865, p=0.0088 ✓ REJECT H0</span>
+        <span class="stat-badge sig-badge">knowledge↔self-efficacy r=0.50</span>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="study-card p-5">
+          <p class="text-xs font-mono text-brand-silverDark mb-3">
+            ⚡ THE CARE-SEEKING LEAK — knowledge &amp; intent don't reach the
+            clinic
+          </p>
+          <div class="chart-box">
+            <canvas id="kapFunnel"></canvas>
+          </div>
+          <p class="text-xs text-brand-silverDark mt-3">
+            Among ever-experienced (68.4%), only 42.0% sought medical care;
+            the campus health centre serves just 13.8%. The top barrier —
+            "it would resolve on its own" — cited by 70.7% of the sample.
+          </p>
+        </div>
+        <div class="study-card p-5">
+          <p class="text-sm text-brand-silver mb-3">
+            <i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i>Smart
+            insights
+          </p>
+          <ul class="text-sm text-brand-silver space-y-2">
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Symptom normalisation, not ignorance, suppresses care: 69.1%
+              good knowledge + 88.0% future intent, yet the modal first
+              response to irregular cycles was to
+              <b class="text-white">ignore it</b>.
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Knowledge→self-efficacy is the strongest measured link
+              (r=0.50) and self-efficacy is the most trainable HBM
+              construct — pair a "red-flag cycle" module with a concrete
+              action script ("book the clinic within X days").
+            </li>
+            <li class="flex gap-2">
+              <span class="text-brand-navyAccent font-mono">›</span
+              >Knowledge predicts future intent (OR=1.22, p=0.005) and each
+              level step down reduces it (OR=0.59) — juniors need targeted
+              first-contact support, senior-style self-referral won't reach
+              them.
+            </li>
+          </ul>
+          <div class="mt-4">
+            <p class="text-xs font-mono text-brand-silverDark mb-2">
+              HBM: KNOWLEDGE CORRELATES WITH (Pearson)
+            </p>
+            <div class="chart-box" style="height: 240px">
+              <canvas id="kapHbm"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section
+      class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+    >
+      <div class="study-card p-8 text-center">
+        <p class="text-sm text-brand-silver mb-4 max-w-2xl mx-auto">
+          Full reproducibility: every figure and table behind these charts is
+          generated by committed Python pipelines (pandas · scipy ·
+          statsmodels · matplotlib) — plus the complete APA-style report,
+          Excel workbook and documentation.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="https://github.com/garba-the-analyst/garba-the-analyst-data-analysis-portfolio"
+            target="_blank"
+            class="inline-flex items-center gap-2 bg-brand-navyAccent/10 border border-brand-navyAccent/50 text-brand-navyAccent font-mono text-sm px-5 py-2.5 rounded-sm hover:bg-brand-navyAccent/20 transition-colors"
+          >
+            <i class="fa-brands fa-github"></i> Open the analysis repository
+          </a>
+          <a
+            href="/#contact"
+            class="inline-flex items-center gap-2 border border-brand-obsidianLight text-brand-silver font-mono text-sm px-5 py-2.5 rounded-sm hover:text-white hover:border-brand-silverDark transition-colors"
+          >
+            <i class="fa-solid fa-envelope"></i> Commission an analysis
+          </a>
+        </div>
+      </div>
+      <p class="text-center text-xs text-brand-silverDark font-mono mt-10">
+        <a href="/" class="hover:text-white transition-colors">← Back to portfolio</a>
+      </p>
+    </section>
+
+    <footer class="py-8 text-center text-xs text-brand-silverDark font-mono">
+      <p>
+        <i class="fa-solid fa-chart-line text-brand-navyAccent mr-1"></i
+        >Garba-The-Analyst — research analytics · built with Eleventy ·
+        deployed on Netlify
+      </p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        Chart.defaults.color = "#a0a0a0";
+        Chart.defaults.font.family = '"Fira Code", "Courier New", monospace';
+        Chart.defaults.font.size = 11;
+
+        const GRID = "#1e1e1e";
+        const BLUE = "#60a5fa";
+        const NAVY = "#2563eb";
+        const LIGHT = "#93c5fd";
+        const AMBER = "#f59e0b";
+        const GREEN = "#34d399";
+        const RED = "#f87171";
+
+        const options = {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: "#c0c0c0", boxWidth: 12 } },
+          },
+          scales: {
+            x: { grid: { color: GRID }, ticks: { color: "#a0a0a0" } },
+            y: { grid: { color: GRID }, ticks: { color: "#a0a0a0" } },
+          },
+        };
+
+        function fmt(id, cfg) {
+          return new Chart(document.getElementById(id), cfg);
+        }
+
+        // ---- MALARIA ----
+        fmt("malariaCats", {
+          type: "bar",
+          data: {
+            labels: ["Good", "Moderate", "Poor"],
+            datasets: [
+              {
+                label: "Knowledge (%)",
+                data: [83.8, 11.8, 4.4],
+                backgroundColor: BLUE,
+              },
+              {
+                label: "Practice (%)",
+                data: [49.5, 49.2, 1.2],
+                backgroundColor: AMBER,
+              },
+            ],
+          },
+          options: { ...options, scales: { ...options.scales, y: { ...options.scales.y, title: { display: true, text: "% of students" }, max: 100 } } },
+        });
+
+        fmt("malariaFunnel", {
+          type: "bar",
+          data: {
+            labels: ["Own an ITN", "Would replace a torn net", "Sleep under ITN every night"],
+            datasets: [
+              {
+                label: "% of students",
+                data: [50.2, 44.2, 5.3],
+                backgroundColor: [NAVY, BLUE, RED],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            indexAxis: "y",
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, x: { ...options.scales.x, title: { display: true, text: "% of students" }, max: 100 } },
+          },
+        });
+
+        fmt("malariaLevel", {
+          type: "line",
+          data: {
+            labels: ["100 Level", "200 Level", "300 Level", "400 Level"],
+            datasets: [
+              {
+                label: "Knowledge score (/10)",
+                data: [7.66, 8.65, 9.25, 9.25],
+                borderColor: BLUE,
+                backgroundColor: "rgba(96,165,250,0.15)",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 5,
+              },
+              {
+                label: "Practice score (/40)",
+                data: [27.58, 25.71, 30.57, 31.28],
+                borderColor: AMBER,
+                backgroundColor: "rgba(245,158,11,0.12)",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: options,
+        });
+
+        // ---- SUBSTANCE ----
+        fmt("subCascade", {
+          type: "bar",
+          data: {
+            labels: ["Ever used", "Past 3 months", "Problem use (CAGE-type)"],
+            datasets: [
+              {
+                label: "% of sample (n=395)",
+                data: [15.9, 9.4, 5.6],
+                backgroundColor: [NAVY, BLUE, RED],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, y: { ...options.scales.y, title: { display: true, text: "% of sample" }, max: 100 } },
+          },
+        });
+
+        fmt("subSubstances", {
+          type: "bar",
+          data: {
+            labels: ["Alcohol", "Codeine syrup", "Tobacco", "Sedatives", "Tramadol", "Cannabis"],
+            datasets: [
+              {
+                label: "% of total sample",
+                data: [10.4, 5.3, 3.8, 3.0, 1.8, 1.3],
+                backgroundColor: BLUE,
+              },
+            ],
+          },
+          options: {
+            ...options,
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, y: { ...options.scales.y, title: { display: true, text: "% of sample" } } },
+          },
+        });
+
+        fmt("subFactors", {
+          type: "bar",
+          data: {
+            labels: ["Peer pressure", "Emotional distress", "Coping", "Parental monitoring"],
+            datasets: [
+              {
+                label: "Strongly agree / agree (%)",
+                data: [97.7, 93.2, 93.2, 93.2],
+                backgroundColor: [RED, BLUE, BLUE, BLUE],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            indexAxis: "y",
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, x: { ...options.scales.x, max: 100, title: { display: true, text: "% strongly agree/agree" } } },
+          },
+        });
+
+        // ---- SDL ----
+        fmt("sdlLevel", {
+          type: "bar",
+          data: {
+            labels: ["100 Level", "200 Level", "300 Level", "400 Level"],
+            datasets: [
+              {
+                label: "Mean SDL total (/120)",
+                data: [103.63, 101.97, 100.86, 99.04],
+                backgroundColor: [BLUE, BLUE, BLUE, AMBER],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, y: { ...options.scales.y, suggestedMin: 90, title: { display: true, text: "mean SDL score" } } },
+          },
+        });
+
+        fmt("sdlSubscales", {
+          type: "radar",
+          data: {
+            labels: ["Desire for Learning", "Self-Management", "Self-Control"],
+            datasets: [
+              {
+                label: "Subscale mean (1–5)",
+                data: [4.35, 4.32, 3.93],
+                borderColor: BLUE,
+                backgroundColor: "rgba(96,165,250,0.15)",
+                pointBackgroundColor: [BLUE, BLUE, RED],
+              },
+              {
+                label: "Scale midpoint (3.0)",
+                data: [3.0, 3.0, 3.0],
+                borderColor: GRID,
+                pointRadius: 0,
+                borderDash: [5, 5],
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                min: 2.5,
+                max: 5,
+                grid: { color: GRID },
+                angleLines: { color: GRID },
+                pointLabels: { color: "#c0c0c0" },
+                ticks: { color: "#a0a0a0", backdropColor: "transparent" },
+              },
+            },
+            plugins: { legend: { labels: { color: "#c0c0c0", boxWidth: 12 } } },
+          },
+        });
+
+        fmt("sdlAccess", {
+          type: "bar",
+          data: {
+            labels: ["Own a device", "Depend on mobile data", "Find it reliable", "Access daily"],
+            datasets: [
+              {
+                label: "% (n=379)",
+                data: [99.5, 93.4, 78.4, 66.0],
+                backgroundColor: [GREEN, LIGHT, AMBER, NAVY],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, y: { ...options.scales.y, max: 100, title: { display: true, text: "% of students" } } },
+          },
+        });
+
+        // ---- MENSTRUAL KAP ----
+        fmt("kapFunnel", {
+          type: "bar",
+          data: {
+            labels: [
+              "Good knowledge",
+              "Positive attitude",
+              "Would seek help in future",
+              "Experienced an irregular cycle",
+              "Actually sought medical care",
+              "Used the campus health centre",
+            ],
+            datasets: [
+              {
+                label: "% of students (n=376)",
+                data: [69.1, 52.7, 88.0, 68.4, 42.0, 13.8],
+                backgroundColor: [BLUE, LIGHT, GREEN, NAVY, AMBER, RED],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, y: { ...options.scales.y, max: 100, title: { display: true, text: "% of students" } } },
+          },
+        });
+
+        fmt("kapHbm", {
+          type: "bar",
+          data: {
+            labels: ["Self-efficacy", "Perceived severity", "Susceptibility", "Perceived benefits"],
+            datasets: [
+              {
+                label: "Pearson r with knowledge",
+                data: [0.5, 0.44, 0.32, 0.24],
+                backgroundColor: [GREEN, BLUE, LIGHT, GRID],
+              },
+            ],
+          },
+          options: {
+            ...options,
+            indexAxis: "y",
+            plugins: { legend: { display: false } },
+            scales: { ...options.scales, x: { ...options.scales.x, min: 0, max: 1, title: { display: true, text: "r (Pearson)" } } },
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
